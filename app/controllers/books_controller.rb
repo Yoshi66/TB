@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @accounting = Book.where(course:'Accounting')
   end
 
   # GET /books/1
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
     #@book = @user.books.build(book_params)
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -60,6 +61,10 @@ class BooksController < ApplicationController
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def accounting
+    @subject = Book.where(course: 'Accounting')
   end
 
   private

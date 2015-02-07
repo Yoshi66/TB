@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :books
-
   root 'home#index'
   devise_for :users, :controller =>{
     :sessions      => "users/sessions",
     :registrations => "users/registrations"
   }
+  resources :books
+  get '/books/accounting/:number', to: 'books#accounting', as:'accounting'
+  #get '/books/accounting/101', to: 'books#accounting', as:'accounting_101'
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

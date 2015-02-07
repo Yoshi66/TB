@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :course %><br>
-    <%= f.text_field :course %>
+    <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'History'] %>
   </div>
   <div class="field">
     <%= f.label :number %><br>
-    <%= f.number_field :number %>
+    <%= f.select :number, [['Course Numver', nil], 101,303, 309, 311, 409] %>
   </div>
   <div class="actions">
     <%= f.submit %>
