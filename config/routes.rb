@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :books
+
   root 'home#index'
   devise_for :users, :controller =>{
     :sessions      => "users/sessions",
