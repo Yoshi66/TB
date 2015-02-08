@@ -1,3 +1,17 @@
+<%= form_for(@book) do |a| %>
+  <% @books.each_with_index do |book, index| %>
+    <%= fields_for "books[#{index}]", book do |f| %>
+      <p1>course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %></p>
+      <p>number: <%= f.select :number, [['Course Numver', nil], 101,201, 301, 401, 501] %></p>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= a.submit %>
+  </div>
+<% end %>
+
+
+
 <%= form_for(@book) do |f| %>
   <% if @book.errors.any? %>
     <div id="error_explanation">

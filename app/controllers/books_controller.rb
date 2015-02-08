@@ -18,6 +18,9 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @books = Array.new(3){Book.new}
+    logger.debug @books
+    logger.debug '///////////////////////////'
   end
 
   # GET /books/1/edit
@@ -27,11 +30,22 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
+
     @user = current_user
-    @book = @user.books.create(book_params)
-    #@book = @user.books.build(book_params)
+    @books = params[:books].values.collect { |book| Book.new(book) }
+    logger.debug @books
     respond_to do |format|
-      if @book.save
+      if @books.all?(&:valid?)
+        logger.debug '///////////////////////////'
+        logger.debug @books[0][:course]
+        logger.debug @books[1][:course]
+        logger.debug @books[2][:course]
+        logger.debug '///////////////////////////'
+        @books.each do |a|
+          @book = @user.books.create(course: a[:course], number: a[:number])
+          @book.save
+        end
+        #@book = @user.books.build(book_params)
         format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
