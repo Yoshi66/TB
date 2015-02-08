@@ -3,12 +3,30 @@
   <% if !@accounting.nil? %>
     <% @accounting.each do |f| %>
       <ul>
-        <li><h3><%=link_to f.number, accounting_path(f.number)%></h3></li>
+        <li><h3><%=link_to f.number, subject_path(f.course,f.number)%></h3></li>
       </ul>
     <% end %>
   <% end %>
-<h2>Hisotry</h2>
+<h2>Biology</h2>
+  <% if !@biology.nil? %>
+    <% @biology.each do |f| %>
+      <ul>
+        <% logger.debug f.course %>
+        <% logger.debug '//////////////////' %>
+        <li><h3><%=link_to f.number, subject_path(f.course.downcase,f.number)%></h3></li>
+      </ul>
+    <% end %>
+  <% end %>
 <h2>Music</h2>
+  <% if !@music.nil? %>
+    <% @music.each do |f| %>
+      <ul>
+        <% logger.debug f.course %>
+        <% logger.debug '//////////////////' %>
+        <li><h3><%=link_to f.number, subject_path(f.course,f.number)%></h3></li>
+      </ul>
+    <% end %>
+  <% end %>
 
 <table>
   <thead>

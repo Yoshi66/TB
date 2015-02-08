@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     :registrations => "users/registrations"
   }
   resources :books
-  get '/books/accounting/:number', to: 'books#accounting', as:'accounting'
+  get '/books/:course/:number', to: 'subjects#show', as:'subject'
   #get '/books/accounting/101', to: 'books#accounting', as:'accounting_101'
 
 

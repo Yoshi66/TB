@@ -6,6 +6,8 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @accounting = Book.where(course:'Accounting')
+    @biology = Book.where(course:'Biology')
+    @music = Book.where(course:'Music')
   end
 
   # GET /books/1
@@ -61,10 +63,6 @@ class BooksController < ApplicationController
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def accounting
-    @subject = Book.where(course: 'Accounting')
   end
 
   private
