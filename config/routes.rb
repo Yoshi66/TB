@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   }
   resources :books
   get '/books/:course/:number', to: 'subjects#show', as:'subject'
+  get '/lookup/quick_look', to:'lookup#quick_look'
+  match '/lookup/process', to:'lookup#matchup',          via:'post'
+  #match '/signin', to: 'sessions#new',           via: 'get'
   #get '/books/accounting/101', to: 'books#accounting', as:'accounting_101'
 
 

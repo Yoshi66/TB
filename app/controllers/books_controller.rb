@@ -30,7 +30,6 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-
     @user = current_user
     @books = params[:books].values.collect { |book| Book.new(book) }
     logger.debug @books
