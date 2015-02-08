@@ -1,45 +1,48 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
-  # GET /books
-  # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.all.sort_by{|m| m.course}
+    store = Array.new
+    @storea = Array.new
+    @books.each do |a|
+      if store.include?"#{a.course},#{a.number}"
+        logger.debug '///////////////////////////'
+        logger.debug 'already stored'
+        logger.debug '///////////////////////////'
+      else
+        @storea << a
+        @store =  @storea.sort_by{|m| [m.course, m.number]}
+        logger.debug store
+        logger.debug 'first time to be output'
+        logger.debug '///////////////////////'
+      end
+      store << "#{a.course},#{a.number}"
+    end
+    logger.debug @store
+    logger.debug '..................................'
     @accounting = Book.where(course:'Accounting')
     @biology = Book.where(course:'Biology')
     @music = Book.where(course:'Music')
   end
 
-  # GET /books/1
-  # GET /books/1.json
   def show
   end
 
-  # GET /books/new
   def new
     @book = Book.new
     @books = Array.new(3){Book.new}
-    logger.debug @books
-    logger.debug '///////////////////////////'
   end
 
-  # GET /books/1/edit
   def edit
   end
 
-  # POST /books
-  # POST /books.json
   def create
     @user = current_user
     @books = params[:books].values.collect { |book| Book.new(book) }
     logger.debug @books
     respond_to do |format|
       if @books.all?(&:valid?)
-        logger.debug '///////////////////////////'
-        logger.debug @books[0][:course]
-        logger.debug @books[1][:course]
-        logger.debug @books[2][:course]
-        logger.debug '///////////////////////////'
         @books.each do |a|
           @book = @user.books.create(course: a[:course], number: a[:number])
           @book.save
@@ -54,8 +57,6 @@ class BooksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /books/1
-  # PATCH/PUT /books/1.json
   def update
     respond_to do |format|
       if @book.update(book_params)
@@ -68,8 +69,6 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /books/1
-  # DELETE /books/1.json
   def destroy
     @book.destroy
     respond_to do |format|
