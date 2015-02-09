@@ -4,23 +4,18 @@ class BooksController < ApplicationController
   def index
     @books = Book.all.sort_by{|m| m.course}
     store = Array.new
-    @storea = Array.new
+    @tstore = Array.new
     @books.each do |a|
       if store.include?"#{a.course},#{a.number}"
-        logger.debug '///////////////////////////'
-        logger.debug 'already stored'
-        logger.debug '///////////////////////////'
+        logger.debug 'already done'
       else
-        @storea << a
-        @store =  @storea.sort_by{|m| [m.course, m.number]}
-        logger.debug store
+        @tstore << a
+        @store =  @tstore.sort_by{|m| [m.course, m.number]}
         logger.debug 'first time to be output'
-        logger.debug '///////////////////////'
       end
       store << "#{a.course},#{a.number}"
     end
-    logger.debug @store
-    logger.debug '..................................'
+    logger.debug '////////////////////////////'
     @accounting = Book.where(course:'Accounting')
     @biology = Book.where(course:'Biology')
     @music = Book.where(course:'Music')

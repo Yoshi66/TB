@@ -1,12 +1,13 @@
 <%= link_to 'Quick Look', lookup_quick_look_path %>
-<%= link_to 'New Book', new_book_path %>
+<%= link_to 'Sell My Textbooks', new_book_path %>
 <h1>Listing books</h1>
-
-<% @store.each_with_index do |b, i|%>
-  <% if i != 0 %>
-  <h2><%= b.course unless @store[0..i-1].map(&:course).include?"#{b.course}" %></h2>
-  <% else %>
-    <h2><%= b.course %></h2>
+<% if !@store.nil? %>
+  <% @store.each_with_index do |b, i|%>
+    <% if i != 0 %>
+    <h2><%= b.course unless @store[0..i-1].map(&:course).include?"#{b.course}" %></h2>
+    <% else %>
+      <h2><%= b.course %></h2>
+    <% end %>
+      <li><h3><%=link_to "#{b.course} #{b.number}", subject_path(b.course,b.number)%></h3></li>
   <% end %>
-    <li><h3><%=link_to "#{b.course} #{b.number}", subject_path(b.course,b.number)%></h3></li>
 <% end %>
