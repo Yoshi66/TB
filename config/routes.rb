@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
-  devise_for :users, :controller =>{
+  devise_for :users, path_names: {sign_in:'login', sign_out:'logout'}, :controller =>{
     :sessions      => "users/sessions",
     :registrations => "users/registrations"
   }
