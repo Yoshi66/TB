@@ -2,39 +2,31 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
      make_accounting
-     make_biology
+     make_user(301, "Accounting")
+     make_user(301, "Accounting", "Biology")
+     make_user(301, "Accounting", "Biology", "Music")
    end
 end
 
 
   def make_accounting
-    10.times do
-      name = Faker::Name.name
-      email = Faker::Internet.email
-      password = '11112222'
-      password_confirmation = '11112222'
-      course = 'Accounting'
-      number = 101
-      User.create!(name: name,
-                   email: email,
-                   password: password,
-                   password_confirmation: password_confirmation)
-      User.find_by(name: name).books.create!(course: course, number: number)
+    5.times do
+      make_user(101,"Accounting", "Biology","Music")
     end
   end
 
-  def make_biology
-    5.times do
+  def make_user(number,*courses)
       name = Faker::Name.name
       email = Faker::Internet.email
       password = '11112222'
       password_confirmation = '11112222'
-      course = 'Biology'
-      number = 101
+      number = number
       User.create!(name: name,
                    email: email,
                    password: password,
                    password_confirmation: password_confirmation)
-      User.find_by(name: name).books.create!(course: course, number: number)
-    end
+      courses.each do |a|
+        User.find_by(name: name).books.create!(course: a, number: number)
+      end
   end
+

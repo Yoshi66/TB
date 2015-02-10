@@ -7,18 +7,12 @@ class BooksController < ApplicationController
     @tstore = Array.new
     @books.each do |a|
       if store.include?"#{a.course},#{a.number}"
-        logger.debug 'already done'
       else
         @tstore << a
         @store =  @tstore.sort_by{|m| [m.course, m.number]}
-        logger.debug 'first time to be output'
       end
       store << "#{a.course},#{a.number}"
     end
-    logger.debug '////////////////////////////'
-    @accounting = Book.where(course:'Accounting')
-    @biology = Book.where(course:'Biology')
-    @music = Book.where(course:'Music')
   end
 
   def show
