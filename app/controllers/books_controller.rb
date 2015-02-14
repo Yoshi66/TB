@@ -2,10 +2,11 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all.sort_by{|m| m.course}
+    @books = Book.search(params[:search])
+    @book_sort = Book.all.sort_by{|m| m.course}
     store = Array.new
     @tstore = Array.new
-    @books.each do |a|
+    @book_sort.each do |a|
       if store.include?"#{a.course},#{a.number}"
       else
         @tstore << a
@@ -65,6 +66,7 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

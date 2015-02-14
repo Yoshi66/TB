@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get '/about' ,to:'home#about'
   devise_for :users, path_names: {sign_in:'login', sign_out:'logout'}, :controller =>{
     :sessions      => "users/sessions",
     :registrations => "users/registrations"
