@@ -1,21 +1,23 @@
 <%= link_to 'Quick Look', lookup_quick_look_path %>
 <%= link_to 'Sell Books', new_book_path %>
-<p><%= link_to 'Search by Book Name', "#" %></p>
+<h3>Search by Book Name</h3>
 <%= form_tag books_path, :method => 'get' do %>
   <p>
-    <%= text_field_tag :search, params[:search], placeholder:"textname" %>
+    <%= text_field_tag :search, params[:search], placeholder:"Title/Isbn/Course" %>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
 <p>
   <%if @books.present? %>
     <% @books.map do |r|%>
+      <%= r.course %>
       <%= r.number %>
+      <%= r.name %>
+      <%= r.isbn %>
     <% end %>
   <% end %>
 </p>
 
-<%= link_to 'Book ISBN', "#" %>
 
 
 <h1>Listing books</h1>

@@ -1,4 +1,7 @@
-<p>showwwwwwwwwwwwww</p>
-<%= params[:course] %>
-<%= params[:number] %>
+<p>TextBook</p>
+<% @book.each do |a| %>
+  <p><%= a.course %> <%= a.number %></p>
+  <p>isbn <%= a.isbn %></p>
+  <br>
+<% end %>
 <p><%= @book.count  %> people are willing to sell!</p>

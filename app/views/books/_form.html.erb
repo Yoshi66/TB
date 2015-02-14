@@ -13,8 +13,10 @@
 <%= form_for(@book) do |a| %>
   <% @books.each_with_index do |book, index| %>
     <%= fields_for "books[#{index}]", book do |f| %>
-      <p1>course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %></p>
-      <p>number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %></p>
+      <p>course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
+      number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
+      name: <%= f.text_field :name%>
+      isbn: <%= f.number_field :isbn%></p>
     <% end %>
   <% end %>
   <div class="actions">

@@ -4,7 +4,7 @@ class Book < ActiveRecord::Base
 
   def self.search(search)
     if search.present?
-      where('course LIKE ?', "%#{search}%")
+      where('isbn LIKE ?', "%#{search}%")
     else
       where(true)
     end
