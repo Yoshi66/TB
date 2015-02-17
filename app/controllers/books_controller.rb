@@ -32,14 +32,26 @@ class BooksController < ApplicationController
     @books = params[:books].values.collect { |book| Book.new(book) }
     logger.debug @books
     book_container = Array.new
+    #stock = 0
     @books.each do |a|
-      search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
-      search_result_json = JSON::parse(search_result)
-      a.isbn = search_result_json['docs'].first['isbn'].first
-      if a.course.present?
-        book_container << a
+      #stock += 1
+      #logger.debug stock
+      if !a.isbn.nil?        #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
+        logger.debug 'https://www.googleapis.com/books/v1/volumes?q=isbn:0201558025'
+        search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:0201558025")
+        logger.debug '11111111111111111111111'
+        search_result_json = JSON.parse(search_result.body)
+        puts title = search_result_json['items'][0]['volumeInfo']['title']
+        puts subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
+        puts author = search_result_json['items'][0]['volumeInfo']['authors']
+        puts publisher = search_result_json['items'][0]['volumeInfo']['publisher']
+        puts pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
+          if a.course.present?
+            book_container << a
+          end
       end
     end
+    #logger.debug book_container
     respond_to do |format|
       if book_container.all?(&:valid?)
         book_container.each do |a|

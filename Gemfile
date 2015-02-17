@@ -11,6 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
+gem "pry-rails"
 gem 'httparty'
 gem 'turbolinks'
 gem 'nokogiri'
