@@ -1,7 +1,13 @@
 <p>TextBook</p>
 <% @book.each do |a| %>
   <p><%= a.course %> <%= a.number %></p>
-  <p>isbn <%= a.isbn %></p>
+  <h3> title</h3> <%= a.title unless a.title.nil? %>
+  <h3> subtitle</h3>  <%= a.subtitle unless a.subtitle.nil? %>
+  <h3> author </h3> <%= a.author %>
+  <h3> publisher </h3> <%= a.publisher %>
+  <h3> pub_date </h3> <%= a.pub_date %>
+  <h3> isbn </h3> <%= a.isbn %>
+  <p>///////////////////////////////////////</p>
   <br>
 <% end %>
 <p><%= @book.count  %> people are willing to sell!</p>

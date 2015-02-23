@@ -32,32 +32,28 @@ class BooksController < ApplicationController
     @books = params[:books].values.collect { |book| Book.new(book) }
     logger.debug @books
     book_container = Array.new
-    #stock = 0
     @books.each do |a|
-      #stock += 1
-      #logger.debug stock
-      if !a.isbn.nil?        #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
-        logger.debug 'https://www.googleapis.com/books/v1/volumes?q=isbn:0201558025'
-        search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:0201558025")
+      if !a.isbn.nil?
+      #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
+        #is the first letter of number is 0, it will be deleted. saerch for the reason
+        search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{a.isbn}")
         logger.debug '11111111111111111111111'
+        logger.debug "#{a.isbn}"
+        logger.debug '1118356853'
         search_result_json = JSON.parse(search_result.body)
-        puts title = search_result_json['items'][0]['volumeInfo']['title']
-        puts subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
-        puts author = search_result_json['items'][0]['volumeInfo']['authors']
-        puts publisher = search_result_json['items'][0]['volumeInfo']['publisher']
-        puts pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
-          if a.course.present?
-            book_container << a
-          end
+        title = search_result_json['items'][0]['volumeInfo']['title']
+        logger.debug title.class
+        subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
+        author = search_result_json['items'][0]['volumeInfo']['authors']
+        author = author.join("")
+        publisher = search_result_json['items'][0]['volumeInfo']['publisher']
+        pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
+        @user.books.create(course: a[:course], number: a[:number], isbn: a[:isbn], title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date)
+        book_container << a
       end
     end
-    #logger.debug book_container
     respond_to do |format|
       if book_container.all?(&:valid?)
-        book_container.each do |a|
-          @book = @user.books.create(course: a[:course], number: a[:number], name: a[:name], isbn: a[:isbn])
-          @book.save
-        end
         #@book = @user.books.build(book_params)
         format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
@@ -97,6 +93,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:course, :number, :name, :isbn)
+      params.require(:book).permit(:course, :number, :isbn)
     end
 end
