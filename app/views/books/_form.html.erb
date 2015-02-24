@@ -1,26 +1,20 @@
-<% if @book.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-    <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= form_for(@book) do |a| %>
-  <% @books.each_with_index do |book, index| %>
-    <%= fields_for "books[#{index}]", book do |f| %>
-      <p>course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
-      number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
-      isbn: <%= f.number_field :isbn%>
-      Look for isbn number?<a href='http://www.isbnsearch.org/'>search</a></p>
-    <% end %>
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-  <div class="actions">
-    <%= a.submit %>
-  </div>
-<% end %>
-
+  <%= form_for @book, :url => {:action=> "search"} do |f| %>
+        <p><%#course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
+        <%#number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
+        isbn: <%= f.number_field :isbn%>
+        Look for isbn number?<a href='http://www.isbnsearch.org/'>search</a></p>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>

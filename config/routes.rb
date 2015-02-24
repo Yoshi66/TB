@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     :sessions      => "users/sessions",
     :registrations => "users/registrations"
   }
+  match "books/search" => "books#search", :via => :post
+  match "books/isbn" => "books#isbn", :via => :get
   resources :books
   get '/books/:course/:number', to: 'subjects#show', as:'subject'
   get '/lookup/quick_look', to:'lookup#quick_look'

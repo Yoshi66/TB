@@ -1,0 +1,14 @@
+
+<%= form_for(@book) do |f| %>
+    <p>
+      <%= f.hidden_field :title, :value => @book.title%><%= @book.title %>
+      <%= f.hidden_field :subtitle, :value => @book.subtitle%> <%= @book.subtitle %>
+      <%= f.hidden_field :author, :value => @book.author%> <%= @book.author %>
+      <%= f.hidden_field :publisher, :value => @book.publisher%> <%= @book.publisher%>
+      <%= f.hidden_field :pub_date, :value => @book.pub_date%> <%= @book.pub_date %>
+      <%= f.hidden_field :isbn, :value => @book.isbn %> <%= @book.isbn  %>
+    </p>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
