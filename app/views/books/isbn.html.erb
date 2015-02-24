@@ -1,4 +1,4 @@
-
+<%= image_tag @book.thumbnail %>
 <%= form_for(@book) do |f| %>
     <p>
       <%= f.hidden_field :title, :value => @book.title%><%= @book.title %>
@@ -7,12 +7,26 @@
       <%= f.hidden_field :publisher, :value => @book.publisher%> <%= @book.publisher%>
       <%= f.hidden_field :pub_date, :value => @book.pub_date%> <%= @book.pub_date %>
       <%= f.hidden_field :isbn, :value => @book.isbn %> <%= @book.isbn  %>
+      <%= f.hidden_field :thumbnail, :value => @book.thumbnail %> <%= @book.thumbnail  %>
     </p>
     <%=  f.label :course %>
     <%=  f.text_field :course %><br>
 
     <%=  f.label :number %>
     <%=  f.number_field :number %><br>
+
+    <%=  f.label :professor %>
+    <%=  f.text_field :professor %><br>
+
+    <%=  f.label :price %>
+    <%=  f.number_field :price %><br>
+
+    <%=  f.label :comment %>
+    <%=  f.text_field :comment %><br>
+
+    <%=  f.label :condition %>
+    <%=  f.select :condition, [['Condition',nil], 'New', 'Almost New', 'Dirty','Very Dirty'] %><br>
+
 
     <div class="actions">
       <%= f.submit %>

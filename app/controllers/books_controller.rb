@@ -40,9 +40,14 @@ class BooksController < ApplicationController
         title = search_result_json['items'][0]['volumeInfo']['title']
         subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
         author = search_result_json['items'][0]['volumeInfo']['authors']
+        author[0] = author[0]+' '
         author = author.join("")
+        logger.debug author
         publisher = search_result_json['items'][0]['volumeInfo']['publisher']
         pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
+        thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+        logger.debug 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        logger.debug thumbnail
         logger.debug '////////////////////////////////'
         logger.debug title
         logger.debug subtitle
@@ -50,11 +55,11 @@ class BooksController < ApplicationController
         logger.debug publisher
         logger.debug pub_date
     end
-    redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date)
+    redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date, thumbnail: thumbnail)
   end
 
   def isbn
-    @book = Book.new(isbn: params[:isbn], title: params[:title], subtitle: params[:subtitle], author: params[:author], publisher: params[:publisher], pub_date: params[:pub_date])
+    @book = Book.new(isbn: params[:isbn], title: params[:title], subtitle: params[:subtitle], author: params[:author], publisher: params[:publisher], pub_date: params[:pub_date], thumbnail: params[:thumbnail])
     logger.debug @book.isbn
     logger.debug params
   end
@@ -104,6 +109,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:course, :number, :isbn, :title, :subtitle, :author, :publisher, :pub_date)
+      params.require(:book).permit(:course, :number, :isbn, :title, :subtitle, :author, :publisher, :pub_date, :price, :comment, :condition, :professor, :thumbnail)
     end
 end
