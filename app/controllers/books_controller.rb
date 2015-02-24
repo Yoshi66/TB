@@ -2,7 +2,18 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @book = Book.new
+    @books = Book.search(params[:search])
+    @book_sort = Book.all.sort_by{|m| m.course}
+    store = Array.new
+    @tstore = Array.new
+    @book_sort.each do |a|
+      if store.include?"#{a.course},#{a.number}"
+      else
+        @tstore << a
+        @store =  @tstore.sort_by{|m| [m.course, m.number]}
+      end
+      store << "#{a.course},#{a.number}"
+    end
   end
 
   def show
