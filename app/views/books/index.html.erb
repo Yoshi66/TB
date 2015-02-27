@@ -1,5 +1,4 @@
-<%= link_to 'Quick Look', lookup_quick_look_path %>
-<%= link_to 'Sell Books', new_book_path %>
+<div class="center hero-unit">
 <h3>Search by Book Name</h3>
 <%= form_tag books_path, :method => 'get' do %>
   <p>
@@ -31,3 +30,4 @@
       <li><h3><%=link_to "#{b.course} #{b.number}", subject_path(b.course,b.number)%></h3></li>
   <% end %>
 <% end %>
+</div>
