@@ -1,3 +1,12 @@
+<div class="row">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active col-lg-3 center"><%= link_to 'Bundle Books', new_book_path %></li>
+        <li role="presentation" class="col-lg-3 center"><%= link_to 'Buy Books', books_path %></li>
+        <li role="presentation" class="col-lg-3 center"><%= link_to 'Sell Books', new_book_path %></li>
+        <li role="presentation" class="col-lg-3 center"><%= link_to 'Quick Look', lookup_quick_look_path %></li>
+      </ul>
+    </div>
+
 <div class="center hero-unit">
 <h3>Search by Book Name</h3>
 <%= form_tag books_path, :method => 'get' do %>

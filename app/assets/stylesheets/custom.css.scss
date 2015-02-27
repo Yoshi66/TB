@@ -2,7 +2,30 @@
 
 /* mixins, variables, etc. */
 
+.wrapper {
+    width: 100%;
+    background-color: lightcyan;
+}
+#text {
+    z-index:100;
+    position:absolute;
+    color:white;
+    font-size:100px;
+    font-weight:bold;
+    left:150px;
+    top:250px;
+}
+
+img {
+    background-image: url(7965688918_ec3edf81e2_k.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
 /*$grid-float-breakpoint: 992px*/
+
 
 $grayMediumLight: #eaeaea;
 
@@ -12,8 +35,9 @@ html {
   overflow-y: scroll;
 }
 
+
 body {
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 section {
@@ -61,10 +85,10 @@ p {
 
 /* header */
 
-.navbar-inverse .navbar-nav > li > a {
+/*.navbar-inverse .navbar-nav > li > a {
 color: green;
 }
-
+*/
 #logo {
   float: left;
   margin-right: 10px;
@@ -72,7 +96,7 @@ color: green;
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 15px;
   font-weight: bold;
   line-height: 1;
   &:hover {
