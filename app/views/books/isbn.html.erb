@@ -1,34 +1,48 @@
-<%= image_tag @book.thumbnail, :size => "260x180" %>
-<%= form_for(@book) do |f| %>
-    <p>
-      <%= f.hidden_field :title, :value => @book.title%><%= @book.title %>
-      <%= f.hidden_field :subtitle, :value => @book.subtitle%> <%= @book.subtitle %>
-      <%= f.hidden_field :author, :value => @book.author%> <%= @book.author %>
-      <%= f.hidden_field :publisher, :value => @book.publisher%> <%= @book.publisher%>
-      <%= f.hidden_field :pub_date, :value => @book.pub_date%> <%= @book.pub_date %>
-      <%= f.hidden_field :isbn, :value => @book.isbn %> <%= @book.isbn  %>
-      <%= f.hidden_field :thumbnail, :value => @book.thumbnail %> <%= @book.thumbnail  %>
-    </p>
-    <%=  f.label :course %>
-    <%=  f.text_field :course %><br>
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-wrap">
+            <h1>Is this a Book You Are looking for?</h1>
+          <%= form_for(@book) do |f| %>
+            <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
+              <%= image_tag @book.thumbnail, :size => "180x260" %>
+            </div>
+                <p style="margin-left: 80px">
+                  <%= f.hidden_field :title, :value => @book.title%>Title: <%= @book.title %><br/>
+                  <%= f.hidden_field :subtitle, :value => @book.subtitle%> <%= @book.subtitle %>
+                  <%= f.hidden_field :author, :value => @book.author%> Author: <%= @book.author %><br/>
+                  <%= f.hidden_field :publisher, :value => @book.publisher%> Publisher: <%= @book.publisher%><br/>
+                  <%= f.hidden_field :pub_date, :value => @book.pub_date%> Publication Date: <%= @book.pub_date %>
+                  <%= f.hidden_field :isbn, :value => @book.isbn %>
+                  <%= f.hidden_field :thumbnail, :value => @book.thumbnail %>
+                </p>
+                <div style="clear: both;">
+                  <%=  f.label :course %>
+                  <%=  f.text_field :course, class: "form-control", placeholder:"Business" %><br>
 
-    <%=  f.label :number %>
-    <%=  f.number_field :number %><br>
+                  <%=  f.label :number %>
+                  <%=  f.number_field :number, class: "form-control", placeholder:"101" %><br>
 
-    <%=  f.label :professor %>
-    <%=  f.text_field :professor %><br>
+                  <%=  f.label :professor %>
+                  <%=  f.text_field :professor, class: "form-control",placeholder:"Andrew Abeboi"  %><br>
 
-    <%=  f.label :price %>
-    <%=  f.number_field :price %><br>
+                  <%=  f.label :price %>
+                  <%=  f.number_field :price, class: "form-control", placeholder: "$" %><br>
 
-    <%=  f.label :comment %>
-    <%=  f.text_field :comment %><br>
+                  <%=  f.label :comment %>
+                  <%=  f.text_field :comment, class: "form-control", placeholder:"Things to note"  %><br>
 
-    <%=  f.label :condition %>
-    <%=  f.select :condition, [['Condition',nil], 'New', 'Almost New', 'Dirty','Very Dirty'] %><br>
-
-
-    <div class="actions">
-      <%= f.submit %>
+                  <%=  f.label :condition %>
+                  <%=  f.select :condition, [['Condition',nil], 'New', 'Almost New', 'Dirty','Very Dirty'], class: "form-control" %><br>
+                  <div class="actions" style="margin-top:10px;">
+                    <%= f.submit "Sell It", class:'btn btn-custom btn-lg btn-block'%>
+                  </div>
+                </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-<% end %>
+  </div>
+</section>
+
