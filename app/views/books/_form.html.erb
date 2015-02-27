@@ -9,12 +9,28 @@
       </ul>
     </div>
   <% end %>
-  <%= form_for @book, :url => {:action=> "search"} do |f| %>
-        <p><%#course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
-        <%#number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
-        isbn: <%= f.number_field :isbn%>
-        Look for isbn number?<a href='http://www.isbnsearch.org/'>search</a></p>
-    <div class="actions">
-      <%= f.submit %>
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+         <div class="form-wrap">
+          <h2>Please Enter isbn of Your Book!</h2>
+          <%= form_for @book, :url => {:action=> "search"} do |f| %>
+                <p><div class="center"><%#course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
+                <%#number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
+                isbn: <%= f.number_field :isbn, class: "form-control"%>
+                Look for isbn number?<a href='http://www.isbnsearch.org/'> <u>Go to isbn website!</u></a></div></p>
+            <div class="actions">
+              <%= f.submit class: 'btn btn-custom btn-lg btn-block' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
+</div>
