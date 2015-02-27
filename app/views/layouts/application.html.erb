@@ -7,13 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top nav-opa">
       <div class="container">
-        <%= link_to "TextbookExchange", '#', id: "logo" %>
+        <%= link_to "TextbookExchange", root_path, id: "logo" %>
             <ul class="nav navbar-nav pull-right">
-              <li class='text-primary'><%= link_to "Home",    '#' %></li>
-              <li><%= link_to "Help",    '#' %></li>
-              <li><%= link_to 'Profile', edit_user_registration_path %></li>
+              <li class='text-primary'><%= link_to "Home",    root_path %></li>
+              <li><%= link_to "Sell",    new_book_path  %></li>
+              <li><%= link_to 'Buy', books_path %></li>
               <% if user_signed_in? %>
                 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               <% else %>
@@ -25,6 +25,6 @@
     </nav>
 <%#    <p class="notice"><%= notice %><%# </p>
 <%#     <p class="alert"><%= alert %>
-     <%= yield %>
+    <%= yield %>
 </body>
 </html>

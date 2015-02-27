@@ -1,6 +1,10 @@
-<div class="wrapper">
-    <img src="7965688918_ec3edf81e2_k.jpg" class="img-responsive" alt="Responsive image">
-  <div class="sol-sm-6" id="container">
-    <h1 id="text">We Need Your Books!</h1>
+<%= stylesheet_link_tag "inside/home", :media => "all", 'data-turbolinks-track' => true %>
+  <div class="wrapper">
+      <%= image_tag("7965688918_ec3edf81e2_k.jpg", class: "img-responsive") %>
+    <div class="sol-sm-6" id="container">
+      <h1 id="text">We Need Your Books!</h1>
+    </div>
+    <div class="sol-sm-6 center">
+      <%= link_to "Sign up now!", "#", class: "btn btn-primary", style:"position: absolute; bottom: 0;"%>
+    </div>
   </div>
-</div>
