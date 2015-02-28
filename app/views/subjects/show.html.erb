@@ -1,13 +1,32 @@
-<p>TextBook</p>
-<% @book.each do |a| %>
-  <p><%= a.course %> <%= a.number %></p>
-  <h3> title</h3> <%= a.title unless a.title.nil? %>
-  <h3> subtitle</h3>  <%= a.subtitle unless a.subtitle.nil? %>
-  <h3> author </h3> <%= a.author %>
-  <h3> publisher </h3> <%= a.publisher %>
-  <h3> pub_date </h3> <%= a.pub_date %>
-  <h3> isbn </h3> <%= a.isbn %>
-  <p>///////////////////////////////////////</p>
-  <br>
-<% end %>
-<p><%= @book.count  %> people are willing to sell!</p>
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-wrap">
+            <h1>Books</h1>
+            <% @books.map do |t| %>
+            <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
+              <%= image_tag t.thumbnail, :size => "180x260" %>
+            </div>
+            <div style="margin-left: 80px">
+                  Title: <%= t.title %><br/>
+                  Subtile:<%= t.subtitle %><br/>
+                  Author: <%= t.author %><br/>
+                  Publisher: <%= t.publisher%><br/>
+                  Publication Date: <%= t.pub_date %><br/>
+                  Professor: <%= t.professor %><br/>
+                  Price: <%= t.price %><br/>
+                  Comment <%= t.comment %><br/>
+                  Condition: <%= t.condition %><br/>
+                  Seller: <%= t.users.first.name %>
+                  <br/><br/>
+                  <%= button_to "contact", "#", class:'btn btn-custom'%>
+            </div>
+            <div style="clear: both;">
+            </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
