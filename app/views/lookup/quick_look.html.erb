@@ -1,12 +1,22 @@
-<h1>AAAAAAAAAAAAAAAA</h1>
-<%= form_for @books, :url => url_for(:controller =>'lookup',:action =>'matchup') do |a| %>
-  <% @books.each_with_index do |book, index| %>
-    <%= fields_for "books[#{index}]", book do |f| %>
-      <p><%= index %>th book! course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
-      number: <%= f.select :number, [['Course Numver', nil], 101,201, 301, 401, 501] %></p>
-    <% end %>
-  <% end %>
-  <div class="actions">
-    <%= a.submit %>
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+         <div class="form-wrap">
+            <h1>Bundle</h1>
+            <%= form_for @books, :url => url_for(:controller =>'lookup',:action =>'matchup') do |a| %>
+              <% @books.each_with_index do |book, index| %>
+                <%= fields_for "books[#{index}]", book do |f| %>
+                  <p><%= index %>th book! course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
+                  number: <%= f.select :number, [['Course Numver', nil], 101,201, 301, 401, 501] %></p>
+                <% end %>
+              <% end %>
+              <div class="actions">
+                <%= a.submit %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
