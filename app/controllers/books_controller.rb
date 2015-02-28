@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @books = Book.search(params[:search])
@@ -30,30 +31,33 @@ class BooksController < ApplicationController
   def search
     logger.debug '//////search///////////'
     @book = Book.new(book_params)
-    logger.debug @book.isbn
     logger.debug '/////////////////////'
     if !@book.isbn.nil?
       #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
         #is the first letter of number is 0, it will be deleted. saerch for the reason
         search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book.isbn}")
         search_result_json = JSON.parse(search_result.body)
-        title = search_result_json['items'][0]['volumeInfo']['title']
-        subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
-        author = search_result_json['items'][0]['volumeInfo']['authors']
-        author[0] = author[0]+' '
-        author = author.join("")
-        logger.debug author
-        publisher = search_result_json['items'][0]['volumeInfo']['publisher']
-        pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
-        thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        logger.debug 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-        logger.debug thumbnail
-        logger.debug '////////////////////////////////'
-        logger.debug title
-        logger.debug subtitle
-        logger.debug author
-        logger.debug publisher
-        logger.debug pub_date
+        if search_result_json["totalItems"] != 0
+          title = search_result_json['items'][0]['volumeInfo']['title']
+          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
+          author = search_result_json['items'][0]['volumeInfo']['authors']
+          author[0] = author[0]+' '
+          author = author.join("")
+          publisher = search_result_json['items'][0]['volumeInfo']['publisher']
+          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
+          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+        else
+          search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:0#{@book.isbn}")
+          search_result_json = JSON.parse(search_result.body)
+          title = search_result_json['items'][0]['volumeInfo']['title']
+          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
+          author = search_result_json['items'][0]['volumeInfo']['authors']
+          author[0] = author[0]+' '
+          author = author.join("")
+          publisher = search_result_json['items'][0]['volumeInfo']['publisher']
+          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
+          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+        end
     end
     redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date, thumbnail: thumbnail)
   end

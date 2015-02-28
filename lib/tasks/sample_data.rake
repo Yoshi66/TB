@@ -1,7 +1,9 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
+
      make_accounting
+
      make_user(301, "Accounting")
      make_user(301, "Accounting", "Biology")
      make_user(301, "Accounting", "Biology", "Music")
