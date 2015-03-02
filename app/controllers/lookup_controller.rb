@@ -1,4 +1,5 @@
 class LookupController < ApplicationController
+  before_action :authenticate_user!
 
   def quick_look
     @books = Array.new(3){Book.new}
