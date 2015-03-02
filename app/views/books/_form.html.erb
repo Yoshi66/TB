@@ -19,7 +19,7 @@
           <%= form_for @book, :url => {:action=> "search"} do |f| %>
                 <p><div class="center"><%#course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
                 <%#number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
-                isbn: <%= f.number_field :isbn, class: "form-control", placeholder:"123-456789 => 123456789 "%>
+                isbn: <%= f.text_field :isbn, class: "form-control", placeholder:"123-456789 => 123456789 "%>
                 Look for isbn number?<a href='http://www.isbnsearch.org/'> <u>Go to isbn website!</u></a></div></p>
             <div class="actions">
               <%= f.submit class: 'btn btn-custom btn-lg btn-block' %>

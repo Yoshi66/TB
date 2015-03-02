@@ -31,11 +31,14 @@ class BooksController < ApplicationController
   def search
     logger.debug '//////search///////////'
     @book = Book.new(book_params)
+    @book.isbn = book_params[:isbn].sub('-', '')
+    logger.debug @book.isbn
     logger.debug '/////////////////////'
     if !@book.isbn.nil?
       #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
         #is the first letter of number is 0, it will be deleted. saerch for the reason
         search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book.isbn}")
+        logger.debug search_result
         search_result_json = JSON.parse(search_result.body)
         if search_result_json["totalItems"] != 0
           title = search_result_json['items'][0]['volumeInfo']['title']
