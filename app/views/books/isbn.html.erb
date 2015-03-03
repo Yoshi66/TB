@@ -11,9 +11,13 @@
                 <p style="margin-left: 80px">
                   <%= f.hidden_field :title, :value => @book.title%>Title: <%= @book.title %><br/>
                   <%= f.hidden_field :subtitle, :value => @book.subtitle%> <%= @book.subtitle %>
-                  <%= f.hidden_field :author, :value => @book.author%> Author: <%= @book.author %><br/>
-                  <%= f.hidden_field :publisher, :value => @book.publisher%> Publisher: <%= @book.publisher%><br/>
-                  <%= f.hidden_field :pub_date, :value => @book.pub_date%> Publication Date: <%= @book.pub_date %>
+                  <% if !@book.subtitle.nil?%> Subtitle: <%= @book.subtitle %><br/><%end%>
+                  <%= f.hidden_field :author, :value => @book.author%>
+                  <% if !@book.author.nil?%> Author: <%= @book.author %><br/><%end%>
+                  <%= f.hidden_field :publisher, :value => @book.publisher%>
+                  <% if !@book.publisher.nil?%> Publisher: <%= @book.publisher %><br/><%end%>
+                  <%= f.hidden_field :pub_date, :value => @book.pub_date%>
+                  <% if !@book.pub_date.nil?%> Publication Date: <%= @book.pub_date %><br/><%end%>
                   <%= f.hidden_field :isbn, :value => @book.isbn %>
                   <%= f.hidden_field :thumbnail, :value => @book.thumbnail %>
                 </p>
