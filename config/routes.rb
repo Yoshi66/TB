@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get '/books/:course/:number', to: 'subjects#show', as:'subject'
   get '/lookup/quick_look', to:'lookup#quick_look'
   match '/lookup/process', to:'lookup#matchup',          via:'post'
+  match '/lookup/process', to:'lookup#matchup',          via:'get'
   get '/lookup/result', to:'lookup#result'
-  match '/lookup/hello', to:'lookup#hello',              via: "post"
+  post '/lookup/result', to:'lookup#result'
 
 
 

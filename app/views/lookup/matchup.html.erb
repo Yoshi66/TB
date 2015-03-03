@@ -1,0 +1,33 @@
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-wrap">
+            <h1>Books</h1>
+              <% @books.map do |f| %>
+                <% f.map do |t| %>
+                  <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
+                    <%= image_tag t.thumbnail, :size => "180x260" %>
+                  </div>
+                  <div style="margin-left: 80px">
+                        Title: <%= t.title %><br/>
+                        Subtile:<%= t.subtitle %><br/>
+                        Author: <%= t.author %><br/>
+                        Publisher: <%= t.publisher%><br/>
+                        Publication Date: <%= t.pub_date %><br/>
+                        <br/><br/>
+                  </div>
+                  <div style="clear: both;">
+                  </div>
+                  <% end %>
+                <% end %>
+              <div class="actions center">
+                <%=button_to 'Call Action', lookup_result_path, method: :post, class: 'btn btn-custom',
+                params: {isbn0:@tb0,isbn1:@tb1,isbn2:@tb2} %>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
