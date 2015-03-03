@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/lookup/quick_look', to:'lookup#quick_look'
   match '/lookup/process', to:'lookup#matchup',          via:'post'
   get '/lookup/result', to:'lookup#result'
+  match '/lookup/hello', to:'lookup#hello',              via: "post"
 
 
 
