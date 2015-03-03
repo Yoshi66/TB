@@ -35,34 +35,21 @@ class BooksController < ApplicationController
     logger.debug @book.isbn
     logger.debug '/////////////////////'
     if !@book.isbn.nil?
-      #search_result = HTTParty.get("https://openlibrary.org/search.json?title=#{a.name.gsub(' ','+')}")
-        #is the first letter of number is 0, it will be deleted. saerch for the reason
-        search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{@book.isbn}")
-        logger.debug search_result
-        search_result_json = JSON.parse(search_result.body)
-        if search_result_json["totalItems"] != 0
-          title = search_result_json['items'][0]['volumeInfo']['title']
-          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
-          author = search_result_json['items'][0]['volumeInfo']['authors']
-          author[0] = author[0]+' '
-          author = author.join("")
-          publisher = search_result_json['items'][0]['volumeInfo']['publisher']
-          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
-          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        else
-          search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:0#{@book.isbn}")
-          search_result_json = JSON.parse(search_result.body)
-          title = search_result_json['items'][0]['volumeInfo']['title']
-          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
-          author = search_result_json['items'][0]['volumeInfo']['authors']
-          author[0] = author[0]+' '
-          author = author.join("")
-          publisher = search_result_json['items'][0]['volumeInfo']['publisher']
-          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
-          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        end
+        Book.api_search(@book.isbn)
+        logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        title = Book.api_search(@book.isbn)[0]
+        subtitle = Book.api_search(@book.isbn)[1]
+        author = Book.api_search(@book.isbn)[2]
+        publisher = Book.api_search(@book.isbn)[3]
+        pub_date = Book.api_search(@book.isbn)[4]
+        thumbnail = Book.api_search(@book.isbn)[5]
+        logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     end
-    redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date, thumbnail: thumbnail)
+      if title.nil?
+        redirect_to books_not_found_path
+      else
+      redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date, thumbnail: thumbnail)
+      end
   end
 
   def isbn
@@ -71,6 +58,8 @@ class BooksController < ApplicationController
     logger.debug params
   end
 
+  def not_found
+  end
 
   def create
     @user = current_user

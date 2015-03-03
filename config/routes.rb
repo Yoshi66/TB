@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   }
   match "books/search" => "books#search", :via => :post
   match "books/isbn" => "books#isbn", :via => :get
+  match "books/not_found" => "books#not_found", :via => :get
   resources :books
   get '/books/:course/:number', to: 'subjects#show', as:'subject'
   get '/lookup/quick_look', to:'lookup#quick_look'
   match '/lookup/process', to:'lookup#matchup',          via:'post'
+  get '/lookup/result', to:'lookup#result'
 
 
 
