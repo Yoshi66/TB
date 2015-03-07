@@ -215,3 +215,12 @@ border-radius: 6px;
     padding: 10px 0;
     border-top: 3px solid $gray-lighter;
 }
+
+
+.required {
+    color: #E00;
+}
+
+.required:after {
+    content: " *";
+}

@@ -1,3 +1,4 @@
+<%= flash[:error] %>
 <section id="login">
   <div class="container">
     <div class="row">
@@ -22,16 +23,16 @@
                   <%= f.hidden_field :thumbnail, :value => @book.thumbnail %>
                 </p>
                 <div style="clear: both;">
-                  <%=  f.label :course %>
+                  <%=  f.label :course, class: "required"%>
                   <%=  f.text_field :course, class: "form-control", placeholder:"Business" %><br>
 
-                  <%=  f.label :number %>
+                  <%=  f.label :number, class: "required" %>
                   <%=  f.number_field :number, class: "form-control", placeholder:"101" %><br>
 
                   <%=  f.label :professor %>
                   <%=  f.text_field :professor, class: "form-control",placeholder:"Andrew Abeboi"  %><br>
 
-                  <%=  f.label :price %>
+                  <%=  f.label :price, class: "required" %>
                   <%=  f.number_field :price, class: "form-control", placeholder: "$" %><br>
 
                   <%=  f.label :comment %>
@@ -49,4 +50,3 @@
     </div>
   </div>
 </section>
-

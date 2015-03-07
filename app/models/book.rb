@@ -1,8 +1,9 @@
 class Book < ActiveRecord::Base
   has_many :relationships
   has_many :users, through: :relationships
-  validates :course, presence: true
+  validates :course, presence: true, on: :isbn
   validates :number, presence: true
+  validates :price, presence: true
 
   def self.search(search)
     if search.present?

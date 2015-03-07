@@ -62,14 +62,17 @@ class BooksController < ApplicationController
 
   def create
     @user = current_user
-    @user.books.create(book_params)
     respond_to do |format|
-      if Book.last.isbn = book_params[:isbn]
+      if !book_params[:course].empty? && !book_params[:number].empty? && !book_params[:price].empty?
+        @user.books.create(book_params)
+        logger.debug '.............................'
+        logger.debug params
+        logger.debug '...............................'
         #@book = @user.books.build(book_params)
         format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html { redirect_to books_isbn_path(book_params)}#,flash: {:error => "Fill in the necessary blank"}}
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
