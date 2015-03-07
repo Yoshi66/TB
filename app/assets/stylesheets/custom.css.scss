@@ -207,3 +207,11 @@ background-color: #eeeeee;
 -moz-border-radius: 6px;
 border-radius: 6px;
 }
+
+.users {
+  list-style: none;
+  margin: 0;
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 3px solid $gray-lighter;
+}

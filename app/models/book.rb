@@ -13,21 +13,30 @@ class Book < ActiveRecord::Base
   end
 
 
+
   def self.api_search(isbn)
         search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}")
         search_result_json = JSON.parse(search_result.body)
-        if search_result_json["totalItems"] != 0
+        if !search_result_json.nil?
+          logger.debug 'pass1'
           title = search_result_json['items'][0]['volumeInfo']['title']
-          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle']
-          author = search_result_json['items'][0]['volumeInfo']['authors']
+          subtitle = search_result_json['items'][0]['volumeInfo']['subtitle'] unless !subtitle.nil?
+          author = search_result_json['items'][0]['volumeInfo']['authors'] unless !author.nil?
             if !author.nil?
               author[0] = author[0]+' '
               author = author.join("")
             end
-          publisher = search_result_json['items'][0]['volumeInfo']['publisher']
-          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate']
-          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+          publisher = search_result_json['items'][0]['volumeInfo']['publisher'] unless !publisher.nil?
+          pub_date = search_result_json['items'][0]['volumeInfo']['publishedDate'] unless !pub_date.nil?
+          thumbnail = search_result_json['items'][0]['volumeInfo']['imageLinks']['thumbnail'] unless !thumbnail.nil?
         else
+          logger.debug 'pass2'
+          title = nil
+          subtitle = nil
+          author = nil
+          publisher = nil
+          pub_date = nil
+          thumbnail = nil
           #search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:isbn")
           #search_result_json = JSON.parse(search_result.body)
           #title = search_result_json['items'][0]['volumeInfo']['title']

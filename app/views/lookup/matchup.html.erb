@@ -4,8 +4,7 @@
       <div class="col-xs-12">
         <div class="form-wrap">
             <h1>Books</h1>
-              <% @books.map do |f| %>
-                <% f.map do |t| %>
+              <% @books.map do |t| %>
                   <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
                     <%= image_tag t.thumbnail, :size => "180x260" %>
                   </div>
@@ -19,7 +18,6 @@
                   </div>
                   <div style="clear: both;">
                   </div>
-                  <% end %>
                 <% end %>
               <div class="actions center">
                 <%=button_to 'Call Action', lookup_result_path, method: :post, class: 'btn btn-custom',

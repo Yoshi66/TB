@@ -1,21 +1,36 @@
 <div class="center">
+<%#
 <h3>Search by Book Name</h3>
 <%= form_tag books_path, :method => 'get' do %>
-  <p>
+<%#  <p>
     <%= text_field_tag :search, params[:search], placeholder:"Title/Isbn/Course" %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+ <%#   <%= submit_tag "Search", :name => nil %>
+<%#  </p>
 <% end %>
-
-<h1>Listing books</h1>
-<% if !@store.nil? %>
-  <% @store.each_with_index do |b, i|%>
-    <% if i != 0 %>
-    <h2 style="font-size: 34px; color:black;"><%= b.course unless @store[0..i-1].map(&:course).include?"#{b.course}" %></h2>
-    <% else %>
-      <h2 style="font-size: 34px; color:black;"><%= b.course %></h2>
-    <% end %>
-      <li><h4><%=link_to "#{b.course} #{b.number}", subject_path(b.course,b.number)%></h4></li>
-  <% end %>
-<% end %>
+  <section id="login" style="padding:10px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-wrap">
+            <% if !@store.nil? %>
+              <% @store.each_with_index do |b, i|%>
+                <% if i != 0 %>
+                    <% if !@store[0..i-1].map(&:course).include?"#{b.course}"%>
+                      <h1 style="font-size: 34px;"><%= b.course %></h1>
+                    <% end %>
+                <% else %>
+                    <h1 style="font-size: 34px;"><%= b.course %></h1>
+                <% end %>
+                <%=link_to subject_path(b.course,b.number) do %>
+                  <div class="users">
+                    <h4><%="#{b.course} #{b.number}" %></h4>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

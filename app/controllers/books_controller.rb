@@ -35,20 +35,19 @@ class BooksController < ApplicationController
     logger.debug @book.isbn
     logger.debug '/////////////////////'
     if !@book.isbn.nil?
-        Book.api_search(@book.isbn)
         logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
-        title = Book.api_search(@book.isbn)[0]
-        subtitle = Book.api_search(@book.isbn)[1]
-        author = Book.api_search(@book.isbn)[2]
-        publisher = Book.api_search(@book.isbn)[3]
-        pub_date = Book.api_search(@book.isbn)[4]
-        thumbnail = Book.api_search(@book.isbn)[5]
+        stock = Book.api_search(@book.isbn)
+        #subtitle = Book.api_search(@book.isbn)[1]
+        #author = Book.api_search(@book.isbn)[2]
+        #publisher = Book.api_search(@book.isbn)[3]
+        #pub_date = Book.api_search(@book.isbn)[4]
+        #thumbnail = Book.api_search(@book.isbn)[5]
         logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     end
-      if title.nil?
+      if stock.nil?
         redirect_to books_not_found_path
       else
-      redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: title, subtitle: subtitle, author: author, publisher: publisher, pub_date: pub_date, thumbnail: thumbnail)
+      redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: stock[0], subtitle: stock[1], author: stock[2], publisher: stock[3], pub_date: stock[4], thumbnail: stock[5])
       end
   end
 
