@@ -237,7 +237,6 @@ border-radius: 6px;
     alpha(opacity=50);
 }
 
-
 #text {
     z-index:100;
     position:absolute;
@@ -245,7 +244,16 @@ border-radius: 6px;
     font-size:100px;
     font-weight:bold;
     left:150px;
-    top:250px;
+    top:100px;
+}
+
+#text1 {
+    z-index:100;
+    position:absolute;
+    color:white;
+    font-size:20px;
+    left:600px;
+    top:350px;
 }
 
 img {

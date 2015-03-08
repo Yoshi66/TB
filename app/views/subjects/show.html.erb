@@ -10,15 +10,15 @@
                     <%= image_tag t.thumbnail, :size => "180x260" %>
                   </div>
                   <div style="margin-left: 80px">
-                        Title: <%= t.title %><br/>
-                        Subtile:<%= t.subtitle %><br/>
-                        Author: <%= t.author %><br/>
-                        Publisher: <%= t.publisher%><br/>
-                        Publication Date: <%= t.pub_date %><br/>
-                        Professor: <%= t.professor %><br/>
+                        <% if !t.title.empty?%> Title: <%= t.title %><br/><% end %>
+                        <% if !t.subtitle.empty?%> Subtile:<%= t.subtitle %><br/><% end %>
+                        <% if !t.author.empty?%> Author: <%= t.author %><br/><% end %>
+                        <% if !t.publisher.empty?%> Publisher: <%= t.publisher%><br/><% end %>
+                        <% if !t.pub_date.empty?%> Publication Date: <%= t.pub_date %><br/><% end %>
+                        <% if !t.professor.empty?%> Professor: <%= t.professor %><br/><% end %>
                         Price: <%= t.price %><br/>
-                        Comment <%= t.comment %><br/>
-                        Condition: <%= t.condition %><br/>
+                        <% if !t.comment.empty?%> Comment <%= t.comment %><br/><% end %>
+                        <% if !t.condition.empty?%> Condition: <%= t.condition %><br/><% end %>
                         Seller: <%= t.users.first.name %>
                         <br/><br/>
                         <%= button_to "contact", "#", class:'btn btn-custom'%>
