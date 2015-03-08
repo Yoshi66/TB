@@ -224,3 +224,34 @@ border-radius: 6px;
 .required:after {
     content: " *";
 }
+
+.wrapper {
+    width: 100%;
+    background-color: lightcyan;
+}
+
+.nav-opa{
+    background: rgb(255, 255, 255) transparent;
+    /*background-color: transparent;*/
+    opacity: 1; filter:
+    alpha(opacity=50);
+}
+
+
+#text {
+    z-index:100;
+    position:absolute;
+    color:white;
+    font-size:100px;
+    font-weight:bold;
+    left:150px;
+    top:250px;
+}
+
+img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,33 @@
+/* line 4, /Users/Yoshiki/TB/TB/app/assets/stylesheets/inside/home.css.scss */
+.wrapper {
+  width: 100%;
+  background-color: lightcyan;
+}
+
+/* line 9, /Users/Yoshiki/TB/TB/app/assets/stylesheets/inside/home.css.scss */
+.nav-opa {
+  background: white transparent;
+  /*background-color: transparent;*/
+  opacity: 1;
+  filter: alpha(opacity=50);
+}
+
+/* line 17, /Users/Yoshiki/TB/TB/app/assets/stylesheets/inside/home.css.scss */
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 100px;
+  font-weight: bold;
+  left: 150px;
+  top: 250px;
+}
+
+/* line 27, /Users/Yoshiki/TB/TB/app/assets/stylesheets/inside/home.css.scss */
+img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
