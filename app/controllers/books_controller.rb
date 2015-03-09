@@ -34,17 +34,16 @@ class BooksController < ApplicationController
     @book.isbn = book_params[:isbn].sub('-', '')
     logger.debug @book.isbn
     logger.debug '/////////////////////'
+    @book.isbn = book_params[:isbn].delete(' ')
+    @book.isbn = book_params[:isbn].sub('-', '').delete(' ')
+    logger.debug @book.isbn
+    logger.debug '/////////////////////'
     if !@book.isbn.nil?
         logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         stock = Book.api_search(@book.isbn)
-        #subtitle = Book.api_search(@book.isbn)[1]
-        #author = Book.api_search(@book.isbn)[2]
-        #publisher = Book.api_search(@book.isbn)[3]
-        #pub_date = Book.api_search(@book.isbn)[4]
-        #thumbnail = Book.api_search(@book.isbn)[5]
         logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     end
-      if stock.nil?
+      if stock[0].nil?
         redirect_to books_not_found_path
       else
       redirect_to books_isbn_path(course: '', number: '', isbn: @book.isbn, title: stock[0], subtitle: stock[1], author: stock[2], publisher: stock[3], pub_date: stock[4], thumbnail: stock[5])

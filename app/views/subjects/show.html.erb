@@ -11,14 +11,57 @@
                   </div>
                   <div style="margin-left: 80px">
                         <% if !t.title.empty?%> Title: <%= t.title %><br/><% end %>
-                        <% if !t.subtitle.empty?%> Subtile:<%= t.subtitle %><br/><% end %>
-                        <% if !t.author.empty?%> Author: <%= t.author %><br/><% end %>
-                        <% if !t.publisher.empty?%> Publisher: <%= t.publisher%><br/><% end %>
-                        <% if !t.pub_date.empty?%> Publication Date: <%= t.pub_date %><br/><% end %>
-                        <% if !t.professor.empty?%> Professor: <%= t.professor %><br/><% end %>
+                        <% if !t.subtitle.nil?  %>
+                          <% if t.subtitle == '' %>
+                          <% else %>
+                            Subtitle: <%= t.subtitle %><br/>
+                          <% end %>
+                        <%end%>
+
+                        <% if !t.author.nil?  %>
+                          <% if t.author == '' %>
+                          <% else %>
+                            author: <%= t.author %><br/>
+                          <% end %>
+                        <%end%>
+
+                        <% if !t.publisher.nil?  %>
+                          <% if t.publisher == '' %>
+                          <% else %>
+                            publisher: <%= t.publisher %><br/>
+                          <% end %>
+                        <%end%>
+
                         Price: <%= t.price %><br/>
-                        <% if !t.comment.empty?%> Comment <%= t.comment %><br/><% end %>
-                        <% if !t.condition.empty?%> Condition: <%= t.condition %><br/><% end %>
+
+                        <% if !t.pub_date.nil?  %>
+                          <% if t.pub_date == '' %>
+                          <% else %>
+                            pub_date: <%= t.pub_date %><br/>
+                          <% end %>
+                        <%end%>
+
+                        <% if !t.professor.nil?  %>
+                          <% if t.professor == '' %>
+                          <% else %>
+                            professor: <%= t.professor %><br/>
+                          <% end %>
+                        <%end%>
+
+                        <% if !t.comment.nil?  %>
+                          <% if t.comment == '' %>
+                          <% else %>
+                            comment: <%= t.comment %><br/>
+                          <% end %>
+                        <%end%>
+
+                        <% if !t.condition.nil?  %>
+                          <% if t.condition == '' %>
+                          <% else %>
+                            condition: <%= t.condition %><br/>
+                          <% end %>
+                        <%end%>
+
                         Seller: <%= t.users.first.name %>
                         <br/><br/>
                         <%= button_to "contact", "#", class:'btn btn-custom'%>
