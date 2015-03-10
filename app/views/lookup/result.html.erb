@@ -3,11 +3,12 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="form-wrap">
-            <h1>Books</h1>
-              <% @books.map do |f| %>
-                <% f.map do |t| %>
+            <h1>Sellers</h1>
+              <h1><%= @result_1.name %> <%= @result_1.email %></h1>
+              <% @result_1.books.map do |t| %>
+                <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
                   <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
-                    <%= image_tag t.thumbnail, :size => "180x260" %>
+                      <%= image_tag t.thumbnail, :size => "180x260" %>
                   </div>
                   <div style="margin-left: 80px">
                         Title: <%= t.title %><br/>
@@ -19,10 +20,49 @@
                   </div>
                   <div style="clear: both;">
                   </div>
+                <% end %>
+              <% end %>
+              <% if !@result_2.nil?%>
+                <h1><%= @result_2.name %> <%= @result_2.email %></h1>
+                <% @result_2.books.map do |t| %>
+                  <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
+                    <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
+                        <%= image_tag t.thumbnail, :size => "180x260" %>
+                    </div>
+                    <div style="margin-left: 80px">
+                          Title: <%= t.title %><br/>
+                          Subtile:<%= t.subtitle %><br/>
+                          Author: <%= t.author %><br/>
+                          Publisher: <%= t.publisher%><br/>
+                          Publication Date: <%= t.pub_date %><br/>
+                          <br/><br/>
+                    </div>
+                    <div style="clear: both;">
+                    </div>
                   <% end %>
                 <% end %>
+              <% end %>
+              <% if !@result_3.nil?%>
+                <h1><%= @result_3.name %> <%= @result_3.email %></h1>
+                <% @result_3.books.map do |t| %>
+                  <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
+                    <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
+                        <%= image_tag t.thumbnail, :size => "180x260" %>
+                    </div>
+                    <div style="margin-left: 80px">
+                          Title: <%= t.title %><br/>
+                          Subtile:<%= t.subtitle %><br/>
+                          Author: <%= t.author %><br/>
+                          Publisher: <%= t.publisher%><br/>
+                          Publication Date: <%= t.pub_date %><br/>
+                          <br/><br/>
+                    </div>
+                    <div style="clear: both;">
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
               <div class="actions center">
-                <%=button_to 'Call Action', lookup_hello_path, method: :post, class: 'btn btn-custom'%>
               </div>
           </div>
         </div>
