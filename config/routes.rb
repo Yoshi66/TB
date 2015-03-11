@@ -10,11 +10,13 @@ Rails.application.routes.draw do
   match "books/not_found" => "books#not_found", :via => :get
   resources :books
   get '/books/:course/:number', to: 'subjects#show', as:'subject'
+  post '/books/mail_send', to: 'subjects#mail_send'
   get '/lookup/quick_look', to:'lookup#quick_look'
   match '/lookup/process', to:'lookup#matchup',          via:'post'
   match '/lookup/process', to:'lookup#matchup',          via:'get'
   get '/lookup/result', to:'lookup#result'
   post '/lookup/result', to:'lookup#result'
+
 
 
 

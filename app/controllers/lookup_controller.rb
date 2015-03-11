@@ -41,7 +41,6 @@ class LookupController < ApplicationController
     end
   end
 
-
   def result
     @isbn1 = params[:isbn0]
     @isbn2 = params[:isbn1]

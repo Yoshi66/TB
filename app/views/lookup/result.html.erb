@@ -44,7 +44,7 @@
                   <% end %>
                 <% end %>
                 <div class="actions center">
-                  <%= button_to "contact", "#", class:'btn btn-custom center'%>
+                  <%= button_to "contact", books_mail_send_path(email_from: current_user.email, email_to: current_user.email), class:'btn btn-custom',:target=>["_blank"] %>
                 </div>
               <% end %>
             <% end %>
