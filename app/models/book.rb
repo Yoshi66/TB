@@ -19,7 +19,8 @@ class Book < ActiveRecord::Base
         search_result = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}")
         search_result_json = JSON.parse(search_result.body)
         check = search_result_json['totalItems']
-        if check != '0'
+        logger.debug check
+        if check != 0
           logger.debug 'pass1'
           title = search_result_json['items'][0]['volumeInfo']['title']
           subtitle = search_result_json['items'][0]['volumeInfo']['subtitle'] unless !subtitle.nil?

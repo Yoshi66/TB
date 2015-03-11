@@ -6,9 +6,6 @@ class LookupController < ApplicationController
   end
 
   def matchup
-    logger.debug '/////////////////////////'
-    logger.debug 'boooooooooooookkkkkkkkkkkkkk'
-    logger.debug '/////////////////////////'
     tb0 = [params[:books]["0"]["isbn"]][0]
     tb1 = [params[:books]["1"]["isbn"]][0]
     tb2 = [params[:books]["2"]["isbn"]][0]
@@ -18,11 +15,6 @@ class LookupController < ApplicationController
     @book1 = Book.find_by(isbn: @tb0)
     @book2 = Book.find_by(isbn: @tb1)
     @book3 = Book.find_by(isbn: @tb2)
-    logger.debug '/////////////////////////'
-    logger.debug @book1
-    logger.debug @book2
-    logger.debug @book3
-    logger.debug '/////////////////////////'
     @books = [@book1, @book2, @book3]
   end
 
@@ -64,6 +56,9 @@ class LookupController < ApplicationController
     users_4 = []
     users_5 = []
     users_6 = []
+    @result_1 = []
+    @result_2 = []
+    @result_3 = []
     if !contain_users(books_1, users_1).nil?
       #1 & 2
       i(users_1,users_2,@isbn2)
@@ -82,6 +77,7 @@ class LookupController < ApplicationController
           #1&2 matched but not 3
           @result_1 = users_2.first
           @result_2 = books_3.first.users.first
+          puts @result_1
           logger.debug 'conclusion 1&2 + 3'
         end
       else
@@ -97,6 +93,9 @@ class LookupController < ApplicationController
             if users_6 == [] #test 2 & 3
               #nothing match
               logger.debug 'nothing hit!!!!!!!!!!!!'
+              @result_1 = books_1.first.users.first
+              @result_2 = books_2.first.users.first
+              @result_3 = books_3.first.users.first
               redirect_to books_path
             else
               #2&3 matched
@@ -159,6 +158,14 @@ class LookupController < ApplicationController
         end
       end
     end
+    logger.debug '11111111111111'
+    puts @result_1
+    logger.debug '2222222222222222'
+    puts @result_2
+    logger.debug '33333333333333333'
+    logger.debug @result_3
+    logger.debug 'finalfinal'
+    @result = [@result_1, @result_2, @result_3]
     #redirect_to books_path
   end
 end

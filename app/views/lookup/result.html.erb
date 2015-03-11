@@ -4,66 +4,50 @@
       <div class="col-xs-12">
         <div class="form-wrap">
             <h1>Sellers</h1>
-              <h1><%= @result_1.name %> <%= @result_1.email %></h1>
-              <% @result_1.books.map do |t| %>
-                <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
-                  <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
-                      <%= image_tag t.thumbnail, :size => "180x260" %>
-                  </div>
-                  <div style="margin-left: 80px">
-                        Title: <%= t.title %><br/>
-                        Subtile:<%= t.subtitle %><br/>
-                        Author: <%= t.author %><br/>
-                        Publisher: <%= t.publisher%><br/>
-                        Publication Date: <%= t.pub_date %><br/>
-                        <br/><br/>
-                  </div>
-                  <div style="clear: both;">
-                  </div>
-                <% end %>
-              <% end %>
-              <% if !@result_2.nil?%>
-                <h1><%= @result_2.name %> <%= @result_2.email %></h1>
-                <% @result_2.books.map do |t| %>
+             <% @result.map do |a| %>
+              <% if a != []%>
+                <h1 style: "display:inline;"><%= a.name %></h1>
+                <% a.books.map do |t| %>
                   <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
                     <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
                         <%= image_tag t.thumbnail, :size => "180x260" %>
                     </div>
                     <div style="margin-left: 80px">
-                          Title: <%= t.title %><br/>
-                          Subtile:<%= t.subtitle %><br/>
-                          Author: <%= t.author %><br/>
-                          Publisher: <%= t.publisher%><br/>
-                          Publication Date: <%= t.pub_date %><br/>
+                          <% if !t.title.empty?%> Title: <%= t.title %><br/><% end %>
+                          <% if !t.subtitle.nil?  %>
+                              Subtitle: <%= t.subtitle %><br/>
+                          <%end%>
+                          <% if !t.author.nil?  %>
+                              author: <%= t.author %><br/>
+                          <%end%>
+                          <% if !t.publisher.nil?  %>
+                              publisher: <%= t.publisher %><br/>
+                          <%end%>
+                          Price: <%= t.price %><br/>
+                          isbn: <%= t.isbn %><br/>
+                          <% if !t.pub_date.nil?  %>
+                              pub_date: <%= t.pub_date %><br/>
+                          <%end%>
+                          <% if !t.professor.nil?  %>
+                              professor: <%= t.professor %><br/>
+                          <%end%>
+                          <% if !t.comment.nil?  %>
+                              comment: <%= t.comment %><br/>
+                          <%end%>
+                          <% if !t.condition.nil?  %>
+                              condition: <%= t.condition %><br/>
+                          <%end%>
                           <br/><br/>
                     </div>
                     <div style="clear: both;">
                     </div>
                   <% end %>
                 <% end %>
+                <div class="actions center">
+                  <%= button_to "contact", "#", class:'btn btn-custom center'%>
+                </div>
               <% end %>
-              <% if !@result_3.nil?%>
-                <h1><%= @result_3.name %> <%= @result_3.email %></h1>
-                <% @result_3.books.map do |t| %>
-                  <% if t.isbn == @isbn1 || t.isbn == @isbn2 || t.isbn == @isbn3 %>
-                    <div style="float: left; margin-right:80px; margin-left:20px; margin-bottom:20px;">
-                        <%= image_tag t.thumbnail, :size => "180x260" %>
-                    </div>
-                    <div style="margin-left: 80px">
-                          Title: <%= t.title %><br/>
-                          Subtile:<%= t.subtitle %><br/>
-                          Author: <%= t.author %><br/>
-                          Publisher: <%= t.publisher%><br/>
-                          Publication Date: <%= t.pub_date %><br/>
-                          <br/><br/>
-                    </div>
-                    <div style="clear: both;">
-                    </div>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <div class="actions center">
-              </div>
+            <% end %>
           </div>
         </div>
       </div>
