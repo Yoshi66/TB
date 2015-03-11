@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem "pry-rails"
 gem 'httparty'
 gem 'turbolinks'
+gem 'faker'
 gem 'nokogiri'
 gem 'therubyracer'
 gem 'jbuilder', '~> 2.0'
@@ -32,7 +33,6 @@ group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'debugger'
   gem 'sqlite3'
-  gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
