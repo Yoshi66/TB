@@ -29,19 +29,14 @@ class BooksController < ApplicationController
   end
 
   def search
-    logger.debug '//////search///////////'
     @book = Book.new(book_params)
     @book.isbn = book_params[:isbn].sub('-', '')
     logger.debug @book.isbn
-    logger.debug '/////////////////////'
     @book.isbn = book_params[:isbn].delete(' ')
     @book.isbn = book_params[:isbn].sub('-', '').delete(' ')
     logger.debug @book.isbn
-    logger.debug '/////////////////////'
     if !@book.isbn.nil?
-        logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         stock = Book.api_search(@book.isbn)
-        logger.debug 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     end
       if stock[0].nil?
         redirect_to books_not_found_path
@@ -64,14 +59,10 @@ class BooksController < ApplicationController
     respond_to do |format|
       if !book_params[:course].empty? && !book_params[:number].empty? && !book_params[:price].empty?
         @user.books.create(book_params)
-        logger.debug '.............................'
-        logger.debug params
-        logger.debug '...............................'
-        #@book = @user.books.build(book_params)
         format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { redirect_to books_isbn_path(book_params)}#,flash: {:error => "Fill in the necessary blank"}}
+        format.html { redirect_to books_isbn_path(book_params)}
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -99,12 +90,10 @@ class BooksController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:course, :number, :isbn, :title, :subtitle, :author, :publisher, :pub_date, :price, :comment, :condition, :professor, :thumbnail)
     end
