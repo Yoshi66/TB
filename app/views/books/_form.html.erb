@@ -5,8 +5,7 @@
          <div class="form-wrap">
           <h1 style="font-size: 34px;">Please Enter isbn of Your Book!</h1>
           <%= form_for @book, :url => {:action=> "search"} do |f| %>
-                <p><div class="center"><%#course: <%= f.select :course, [['Course', nil], 'Accounting', 'Biology', 'Music'] %>
-                <%#number: <%= f.select :number, [['Course Number', nil], 101,201, 301, 401, 501] %>
+                <p><div class="center">
                 <h1 style="padding-bottom:0px; font-size:25px;">isbn:</h1><%= f.text_field :isbn, class: "form-control", placeholder:"1234567890"%>
                 Look for isbn number?  <%=link_to "Go to isbn website!", 'http://www.isbnsearch.org/', :target => "_blank"  %> </div></p>
             <div class="actions center">
